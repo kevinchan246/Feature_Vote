@@ -20,18 +20,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication() // not recommmended to use this in production
             .passwordEncoder(getPasswordEncoder())
             .withUser("testing@gmail.com")
-            .password(getPasswordEncoder().encode("1234567"))                        //since using the encoder above, need to make sure that this password is also encoded.
+            .password(getPasswordEncoder().encode("1234567"))             //since using the encoder above, need to make sure that this password is also encoded.
             .roles("USER");
     }
 
     protected void configure(HttpSecurity http) throws Exception{
-        http.csrf().disable()
+        http
             .authorizeRequests()
                 .antMatchers("/").permitAll()   //permit all to see the root page
                 .antMatchers("/login").permitAll()  //permit all to see the login page
                 .anyRequest().hasRole("USER").and() //all other pages has to have a "USER" role
             .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/dashboard")
                 .permitAll()
                 .and()
             .logout()
