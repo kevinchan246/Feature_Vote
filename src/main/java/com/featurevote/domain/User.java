@@ -1,8 +1,11 @@
 package com.featurevote.domain;
 
+import com.featurevote.security.Authority;
+
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 //User table in database
@@ -13,6 +16,7 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private Set<Authority> authorities = new HashSet<>();
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-generate the id
     public Long getId() {
@@ -45,5 +49,25 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                '}';
     }
 }
