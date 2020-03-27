@@ -1,16 +1,15 @@
 package com.featurevote.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 // Feature table in database
 @Entity
 public class Feature {
     private Long id;
     private String title, description, status;
+    private Product product;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-generate the id
@@ -44,5 +43,14 @@ public class Feature {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @ManyToOne
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

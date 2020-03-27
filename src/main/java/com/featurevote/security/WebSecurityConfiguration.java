@@ -31,8 +31,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .userDetailsService(userDetailsService)
             .passwordEncoder(getPasswordEncoder());
 
-
-/*        auth.inMemoryAuthentication() // not recommended to use this in production
+        // not recommended to use this in production
+/*        auth.inMemoryAuthentication()
             .passwordEncoder(getPasswordEncoder())
             .withUser("testing@gmail.com")
             .password(getPasswordEncoder().encode("1234567"))             //since using the encoder above, need to make sure that this password is also encoded.
