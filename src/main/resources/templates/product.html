@@ -7,6 +7,7 @@
 
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
     <div class="container" th:if="${product != null}">
         <h1>Product</h1>
 
@@ -19,16 +20,17 @@
                 <label for="name" class="col-12 col-sm-3 col-form-label">Name:</label>
                 <div class="col-12 col-sm-9">
                 <input type="text" class="form-control" th:field="${product.name}"/>
+                </div>
             </div>
 
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" th:field="${product.published}">
-                <label class="custom-control-label" for="published1">is published</label>
+                <div class="col-12 col-sm-9">
+                    <input type="checkbox" class="custom-control-input" th:field="${product.published}">
+                    <label class="col-12 col-sm-3 custom-control-label" for="published1">Published</label>
+                </div>
             </div>
-        </div>
-
-        <button class="btn btn-primary">Save Product</button>
-
+            <br>
+            <button class="btn btn-info float-right">Save Product</button>
         </form>
     </div>
 
