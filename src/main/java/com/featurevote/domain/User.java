@@ -1,5 +1,7 @@
 package com.featurevote.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.featurevote.security.Authority;
 
 import javax.annotation.processing.Generated;
@@ -11,6 +13,7 @@ import java.util.Set;
 //User table in database
 @Entity
 @Table(name = "users") //this annotation is for avoiding the name/reserved word in mysql
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class User {
     private Long id;
     private String name;
@@ -18,6 +21,7 @@ public class User {
     private String password;
     private Set<Authority> authorities = new HashSet<>();
     private Set<Product> products = new HashSet<>();
+    private Set<Feature> features = new HashSet<>();
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY) //auto-generate the id
     public Long getId() {
@@ -79,5 +83,14 @@ public class User {
                 ", password='" + password + '\'' +
                 ", authorities=" + authorities +
                 '}';
+    }
+
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+    public Set<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Set<Feature> features) {
+        this.features = features;
     }
 }

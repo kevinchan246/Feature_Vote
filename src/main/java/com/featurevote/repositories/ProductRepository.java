@@ -18,4 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //using Spring Data to derive query to let it find the products by user
     //such as    select * from product where user = :user;
     List<Product> findByUser(User user);
+
+    //this create a SQL statement sth like: select * from product where name = :name
+    Optional<Product> findByName(String name);
 }

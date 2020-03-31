@@ -25,15 +25,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <div  class="navbar-nav ml-auto">
+                <div  class="navbar-nav mr-auto">
 
                     <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                     </ul>
+                </div>
 
+                <div  class="navbar-nav ml-auto">
 <!--                    login button dynamically-->
+
                     <div sec:authorize="!isAuthenticated()">
                     <button class="btn btn-warning" id="loginBtn">Log in</button>
 <!--                    the javascript below makes the login button goes to the login page when clicked-->
